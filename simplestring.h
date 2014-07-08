@@ -8,7 +8,7 @@
 #ifndef SIMPLESTRING_H
 #define SIMPLESTRING_H
 #include <string.h>
-#include <ostream>
+#include <iostream>
 
 
 namespace simplestd{
