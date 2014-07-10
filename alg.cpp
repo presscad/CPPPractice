@@ -76,3 +76,39 @@ void merge_sort(int *list, int list_size){
         merge_array(list1, list1_size, list2, list2_size);
     }
 }
+
+void radixSort(int a[], size_t n){
+    int i, m = a[0], exp = 1;
+    int b[20] = {0};
+
+    //Get the greatest value in the array a and assign it to m
+    for (i = 1; i < n; i++){
+        if (a[i] > m)
+        m = a[i];
+    }
+
+    //Loop until exp is bigger than the largest number
+    while (m / exp > 0)
+    {
+        int bucket[10] = { 0 };
+
+        //Count the number of keys that will go into each bucket
+        for (i = 0; i < n; i++)
+            bucket[(a[i] / exp) % 10]++;
+
+        //Add the count of the previous buckets to acquire the indexes after the end of each bucket location in the array
+        for (i = 1; i < 10; i++)
+            bucket[i] += bucket[i - 1]; //similar to count sort algorithm i.e. c[i]=c[i]+c[i-1];
+
+        //Starting at the end of the list, get the index corresponding to the a[i]'s key, decrement it, and use it to place a[i] into array b.
+        for (i = n - 1; i >= 0; i--)
+            b[--bucket[(a[i] / exp) % 10]] = a[i];
+
+        //Copy array b to array a
+        for (i = 0; i < n; i++)
+            a[i] = b[i];
+
+        //Multiply exp by the BASE to get the next group of keys
+        exp *= 10;
+    }
+}
