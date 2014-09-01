@@ -113,7 +113,7 @@ void radixSort(int a[], size_t n){
     }
 }
 
-void printCount(const char *s){
+void countASIICs(const char *s){
     char asc[256];
 
     for(int i=0;i<256;i++){

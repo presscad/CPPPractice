@@ -21,6 +21,6 @@ void merge_sort(int *list, int list_size);
 void radixSort(int arr[],size_t size);
 
 //Print the count occurence of each ASCII character in given string.
-void printCount(const char *s);
+void countASIICs(const char *s);
 
 #endif // ALG_H
