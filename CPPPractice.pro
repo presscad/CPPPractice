@@ -4,13 +4,11 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     alg.cpp \
-    simplestring.cpp \
-    util.cpp
+    simplestring.cpp
 
 HEADERS += \
     alg.h \
-    simplestring.h \
-    util.h
+    simplestring.h
 
 win32:CONFIG(release, debug|release): {
     LIBS += -lVersion -lAdvapi32 -lWs2_32

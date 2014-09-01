@@ -112,3 +112,19 @@ void radixSort(int a[], size_t n){
         exp *= 10;
     }
 }
+
+void printCount(const char *s){
+    char asc[256];
+
+    for(int i=0;i<256;i++){
+        asc[i] = 0;
+    }
+
+    while(*s != '\0'){
+        asc[*s++]++;
+    }
+
+    for(int i=0;i<256;i++){
+        printf("%d ",asc[i]);
+    }
+}

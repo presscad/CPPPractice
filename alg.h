@@ -20,4 +20,7 @@ void merge_sort(int *list, int list_size);
 //Radix sort:worst case O(kn),k is digit count.
 void radixSort(int arr[],size_t size);
 
+//Print the count occurence of each ASCII character in given string.
+void printCount(const char *s);
+
 #endif // ALG_H
