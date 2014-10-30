@@ -122,7 +122,7 @@ public:
     int size() const {
         return rep->sz;
     }
-};
+ };
 }
 
 #endif // SIMPLESTRING_H
