@@ -256,7 +256,7 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message,WPARAM wParam,LPARAM lParam)
 		iHorzPos = si.nPos;
 
 		iPaintBeg = max(0,iVertPos + ps.rcPaint.top / cyChar);
-		iPaintEnd = min(NUMLINES - 1, ps.rcPaint.bottom / cyChar);
+		iPaintEnd = min(NUMLINES - 1, iVertPos + ps.rcPaint.bottom / cyChar);
 
 		for (i = iPaintBeg ; i <= iPaintEnd ; i++)
 		{
