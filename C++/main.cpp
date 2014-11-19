@@ -8,6 +8,7 @@ using namespace simplestd;
 
 int main()
 {
+    sortedArrayVSUsorted();
     system("pause");
 }
 
