@@ -8,7 +8,7 @@ using namespace simplestd;
 
 int main()
 {
-    oneLoopVSTwoLoops();
+    denormalFloatVSNormalFloat();
     system("pause");
     return 0;
 }

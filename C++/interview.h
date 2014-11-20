@@ -5,7 +5,7 @@
 
 typedef std::vector<std::string> StringVector;
 
-//What is the name of the “-->” operator?
+//What is the name of the "-->" operator?
 void printNumbers();
 
 /*
@@ -34,6 +34,15 @@ void sortedArrayVSUsorted();
  *
  */
 void oneLoopVSTwoLoops();
+
+/*
+ *Why does changing 0.1f to 0 slow down performance by 10x?
+ *When denormal values are entirely computed in hardware, implementation techniques exist to allow
+  their processing at speeds comparable to normal numbers;
+  however, the speed of computation is significantly reduced on many modern processors;
+  in extreme cases, instructions involving denormal operands may run as much as 100 times slower.
+ */
+void denormalFloatVSNormalFloat();
 
 //Split string  elegently just use STL.
 StringVector& splitString(const std::string &s, char delim, StringVector &elems);
