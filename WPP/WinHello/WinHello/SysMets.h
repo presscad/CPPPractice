@@ -1,6 +1,10 @@
 /*-----------------------------------------------
    SYSMETS.H -- System metrics display structure
   -----------------------------------------------*/
+#ifndef SYSMETS_H
+#define SYSMETS_H
+
+#include <windows.h>
 
 #define NUMLINES ((int) (sizeof sysmetrics / sizeof sysmetrics [0]))
 
@@ -163,3 +167,4 @@ sysmetrics [] =
      SM_SAMEDISPLAYFORMAT,    TEXT ("SM_SAMEDISPLAYFORMAT"),     
                               TEXT ("Same color format flag")
 } ;
+#endif
