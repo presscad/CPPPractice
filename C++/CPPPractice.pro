@@ -5,11 +5,13 @@ CONFIG -= qt
 SOURCES += main.cpp \
     alg.cpp \
     simplestring.cpp \
-    interview.cpp
+    interview.cpp \
+    singleton.cpp
 
 HEADERS += \
     alg.h \
     simplestring.h \
-    interview.h
+    interview.h \
+    singleton.h
 
 
