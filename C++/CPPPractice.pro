@@ -5,8 +5,7 @@ CONFIG -= qt
 SOURCES += main.cpp \
     alg.cpp \
     simplestring.cpp \
-    interview.cpp \
-    singleton.cpp
+    interview.cpp
 
 HEADERS += \
     alg.h \
