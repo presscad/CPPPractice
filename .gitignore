@@ -1,0 +1,16 @@
+
+C++/singleton.h.gch
+
+*.stash
+
+*.o
+
+*.plist
+
+Debug/CPPPractice.app/Contents/MacOS/CPPPractice
+
+Debug/CPPPractice.app/Contents/PkgInfo
+
+*.lproj
+
+Debug/Makefile

@@ -110,7 +110,7 @@ void denormalFloatVSNormalFloat()
 #define FLOATING
     //if we flush denormals to zero by adding this to the start of the code:
     //Then the version with 0 is no longer 10x slower and actually becomes faster.
-    _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+    //_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
     clock_t start = clock();
 
     const float x[16]={1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6};
