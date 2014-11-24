@@ -1,5 +1,9 @@
 #include "DemoFunctions.h"
 #include "SysMets.h"
+#include <math.h>
+
+#define NUM    1000
+#define TWOPI  (2 * 3.14159)
 
 
 int CDECL MessageBoxPrintf(TCHAR* szCaption, TCHAR* szFormat, ...)
@@ -189,4 +193,101 @@ void PrintText( HWND hwnd,int cxChar,int cyChar,int cxCaps )
 	}
 
 	EndPaint(hwnd,&ps);
+}
+
+void PaintRectangles(HWND hwnd,int cxClient,int cyClient)
+{
+	PAINTSTRUCT ps;
+	HDC hdc = BeginPaint (hwnd, &ps) ;
+
+	Rectangle (hdc,     cxClient / 8,     cyClient / 8,
+		7 * cxClient / 8, 7 * cyClient / 8) ;
+
+	MoveToEx  (hdc,        0,        0, NULL) ;
+	LineTo    (hdc, cxClient, cyClient) ;
+
+	MoveToEx  (hdc,        0, cyClient, NULL) ;
+	LineTo    (hdc, cxClient,        0) ;
+
+	Ellipse   (hdc,     cxClient / 8,     cyClient / 8,
+		7 * cxClient / 8, 7 * cyClient / 8) ;
+
+	RoundRect (hdc,     cxClient / 4,     cyClient / 4,
+		3 * cxClient / 4, 3 * cyClient / 4,
+		cxClient / 4,     cyClient / 4) ;
+
+	EndPaint (hwnd, &ps) ;
+}
+
+void PaintPolygon(HWND hwnd,int iFillMode,POINT points[],int cxClient,int cyClient)
+{
+	PAINTSTRUCT ps;
+	HDC hdc = BeginPaint (hwnd, &ps) ;
+	int i;
+
+	SelectObject (hdc, GetStockObject (GRAY_BRUSH)) ;
+
+	for (i = 0 ; i < 10 ; i++)
+	{
+		points[i].x += cxClient / 2 ;
+		points[i].y += cyClient / 4 ;
+	}
+
+	SetPolyFillMode (hdc, iFillMode) ;
+	Polygon (hdc, points, 10) ;
+
+	EndPaint (hwnd, &ps) ;
+}
+
+void DrawRectangle (HWND hwnd,int cxClient, int cyClient)
+{
+	HBRUSH hBrush ;
+	HDC    hdc ;
+	RECT   rect ;
+
+	if (cxClient == 0 || cyClient == 0)
+		return ;
+
+	SetRect (&rect, rand () % cxClient, rand () % cyClient,
+		rand () % cxClient, rand () % cyClient) ;
+
+	hBrush = CreateSolidBrush (
+		RGB (rand () % 256, rand () % 256, rand () % 256)) ;
+
+	hdc = GetDC (hwnd) ;
+	FillRect (hdc, &rect, hBrush) ;
+	ReleaseDC (hwnd, hdc) ;
+	DeleteObject (hBrush) ;
+}
+
+void PaintSinWave(HWND hwnd, int cxClient, int cyClient)
+{
+	int         i ;
+	PAINTSTRUCT ps ;
+	POINT       apt [NUM] ;
+	HDC hdc = BeginPaint (hwnd, &ps) ;
+
+	MoveToEx (hdc, 0,        cyClient / 2, NULL) ;
+	LineTo   (hdc, cxClient, cyClient / 2) ;
+
+	for (i = 0 ; i < NUM ; i++)
+	{
+		apt[i].x = i * cxClient / NUM ;
+		apt[i].y = (int) (cyClient / 2 * (1 - sin (TWOPI * i / NUM))) ;
+	}
+
+	Polyline (hdc, apt, NUM) ;
+
+	EndPaint (hwnd, &ps) ;
+}
+
+void DrawBezier (HDC hdc, POINT apt[])
+{
+	PolyBezier (hdc, apt, 4) ;
+
+	MoveToEx (hdc, apt[0].x, apt[0].y, NULL) ;
+	LineTo   (hdc, apt[1].x, apt[1].y) ;
+
+	MoveToEx (hdc, apt[2].x, apt[2].y, NULL) ;
+	LineTo   (hdc, apt[3].x, apt[3].y) ;
 }
