@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 
 typedef std::vector<std::string> StringVector;
 
@@ -47,9 +48,19 @@ void denormalFloatVSNormalFloat();
 
 //Split string  elegently just use STL.
 StringVector& splitString(const std::string &s, char delim, StringVector &elems);
+
+//Trim string.
 std::string startTrim(std::string&);
 std::string endTrim(std::string&);
 
+//Convert to string function template;
+template <typename T>
+std::string number2String ( T n )
+{
+    stringstream ss;
+    ss << n;
+    return ss.str();
+}
 
 
 #endif // INTERVIEW_H

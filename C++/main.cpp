@@ -26,6 +26,8 @@ private:
 
 int main()
 {
+    string s = number2String(55);
+    cout<<s<<endl;
     system("pause");
     return 0;
 }
