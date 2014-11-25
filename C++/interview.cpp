@@ -1,9 +1,11 @@
-#include<stdio.h>
+#include <stdio.h>
 #include "interview.h"
 #include <algorithm>
 #include <ctime>
 #include <iostream>
 #include <sstream>
+#include <functional>
+#include <cctype>
 
 void printNumbers()
 {
@@ -149,8 +151,21 @@ StringVector& splitString(const std::string &s, char delim, StringVector &elems)
 {
     std::stringstream ss(s);
     std::string item;
-    while (std::getline(ss, item, delim)) {
+    while (std::getline(ss, item, delim))
+    {
         elems.push_back(item);
     }
     return elems;
+}
+
+std::string startTrim(std::string& s)
+{
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+    return s;
+}
+
+std::string endTrim(std::string& s)
+{
+    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+    return s;
 }

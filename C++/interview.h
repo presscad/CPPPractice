@@ -2,6 +2,7 @@
 #define INTERVIEW_H
 
 #include <vector>
+#include <string>
 
 typedef std::vector<std::string> StringVector;
 
@@ -46,7 +47,8 @@ void denormalFloatVSNormalFloat();
 
 //Split string  elegently just use STL.
 StringVector& splitString(const std::string &s, char delim, StringVector &elems);
-
+std::string startTrim(std::string&);
+std::string endTrim(std::string&);
 
 
 
