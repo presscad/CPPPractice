@@ -15,4 +15,6 @@ void PaintPolygon(HWND hwnd,int iFillMode,POINT points[],int cxClient,int cyClie
 void DrawRectangle(HWND hwnd,int cxClient, int cyClient);
 void PaintSinWave(HWND hwnd, int cxClient, int cyClient);
 void DrawBezier (HDC hdc, POINT apt[]);
+void CombieCloverRgn(HRGN &hRgnClip, int cxClient, int cyClient);
+void PaintClover(HWND hwnd,HRGN hRgnClip, int cxClient, int cyClient);
 #endif

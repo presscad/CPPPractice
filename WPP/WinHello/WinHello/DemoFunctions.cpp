@@ -291,3 +291,56 @@ void DrawBezier (HDC hdc, POINT apt[])
 	MoveToEx (hdc, apt[2].x, apt[2].y, NULL) ;
 	LineTo   (hdc, apt[3].x, apt[3].y) ;
 }
+
+void CombieCloverRgn(HRGN &hRgnClip, int cxClient, int cyClient)
+{
+	HRGN        hRgnTemp[6] ;
+	int i;
+	HCURSOR hCursor = SetCursor (LoadCursor (NULL, IDC_WAIT)) ;
+	ShowCursor (TRUE) ;
+
+	if (hRgnClip)
+		DeleteObject (hRgnClip) ;
+
+	hRgnTemp[0] = CreateEllipticRgn (0, cyClient / 3,
+		cxClient / 2, 2 * cyClient / 3) ;
+	hRgnTemp[1] = CreateEllipticRgn (cxClient / 2, cyClient / 3,
+		cxClient, 2 * cyClient / 3) ;
+	hRgnTemp[2] = CreateEllipticRgn (cxClient / 3, 0,
+		2 * cxClient / 3, cyClient / 2) ;
+	hRgnTemp[3] = CreateEllipticRgn (cxClient / 3, cyClient / 2,
+		2 * cxClient / 3, cyClient) ;
+	hRgnTemp[4] = CreateRectRgn (0, 0, 1, 1) ;
+	hRgnTemp[5] = CreateRectRgn (0, 0, 1, 1) ;
+	hRgnClip    = CreateRectRgn (0, 0, 1, 1) ;
+
+	CombineRgn (hRgnTemp[4], hRgnTemp[0], hRgnTemp[1], RGN_OR) ;
+	CombineRgn (hRgnTemp[5], hRgnTemp[2], hRgnTemp[3], RGN_OR) ;
+	CombineRgn (hRgnClip,    hRgnTemp[4], hRgnTemp[5], RGN_XOR) ;
+
+	for (i = 0 ; i < 6 ; i++)
+		DeleteObject (hRgnTemp[i]) ;
+
+	SetCursor (hCursor) ;
+	ShowCursor (FALSE) ;
+}
+
+void PaintClover(HWND hwnd,HRGN hRgnClip, int cxClient, int cyClient)
+{
+	double      fAngle, fRadius ;
+	PAINTSTRUCT ps;
+	HDC hdc = BeginPaint (hwnd, &ps) ;
+
+	SetViewportOrgEx (hdc, cxClient / 2, cyClient / 2, NULL) ;
+	SelectClipRgn (hdc, hRgnClip) ;
+
+	fRadius = _hypot (cxClient / 2.0, cyClient / 2.0) ;
+
+	for (fAngle = 0.0 ; fAngle < TWOPI ; fAngle += TWOPI / 360)
+	{
+		MoveToEx (hdc, 0, 0, NULL) ;
+		LineTo (hdc, (int) ( fRadius * cos (fAngle) + 0.5),
+			(int) (-fRadius * sin (fAngle) + 0.5)) ;
+	}
+	EndPaint (hwnd, &ps) ;
+}

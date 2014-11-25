@@ -76,50 +76,14 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		cxClient = LOWORD (lParam) ;
 		cyClient = HIWORD (lParam) ;
 
-		hCursor = SetCursor (LoadCursor (NULL, IDC_WAIT)) ;
-		ShowCursor (TRUE) ;
-
-		if (hRgnClip)
-			DeleteObject (hRgnClip) ;
-
-		hRgnTemp[0] = CreateEllipticRgn (0, cyClient / 3,
-			cxClient / 2, 2 * cyClient / 3) ;
-		hRgnTemp[1] = CreateEllipticRgn (cxClient / 2, cyClient / 3,
-			cxClient, 2 * cyClient / 3) ;
-		hRgnTemp[2] = CreateEllipticRgn (cxClient / 3, 0,
-			2 * cxClient / 3, cyClient / 2) ;
-		hRgnTemp[3] = CreateEllipticRgn (cxClient / 3, cyClient / 2,
-			2 * cxClient / 3, cyClient) ;
-		hRgnTemp[4] = CreateRectRgn (0, 0, 1, 1) ;
-		hRgnTemp[5] = CreateRectRgn (0, 0, 1, 1) ;
-		hRgnClip    = CreateRectRgn (0, 0, 1, 1) ;
-
-		CombineRgn (hRgnTemp[4], hRgnTemp[0], hRgnTemp[1], RGN_OR) ;
-		CombineRgn (hRgnTemp[5], hRgnTemp[2], hRgnTemp[3], RGN_OR) ;
-		CombineRgn (hRgnClip,    hRgnTemp[4], hRgnTemp[5], RGN_XOR) ;
-
-		for (i = 0 ; i < 6 ; i++)
-			DeleteObject (hRgnTemp[i]) ;
-
-		SetCursor (hCursor) ;
-		ShowCursor (FALSE) ;
+		CombieCloverRgn(hRgnClip,cxClient,cyClient);
+		
 		return 0 ;
 
 	case WM_PAINT:
-		hdc = BeginPaint (hwnd, &ps) ;
+		
+		PaintClover(hwnd,hRgnClip,cxClient,cyClient);
 
-		SetViewportOrgEx (hdc, cxClient / 2, cyClient / 2, NULL) ;
-		SelectClipRgn (hdc, hRgnClip) ;
-
-		fRadius = _hypot (cxClient / 2.0, cyClient / 2.0) ;
-
-		for (fAngle = 0.0 ; fAngle < TWO_PI ; fAngle += TWO_PI / 360)
-		{
-			MoveToEx (hdc, 0, 0, NULL) ;
-			LineTo (hdc, (int) ( fRadius * cos (fAngle) + 0.5),
-				(int) (-fRadius * sin (fAngle) + 0.5)) ;
-		}
-		EndPaint (hwnd, &ps) ;
 		return 0 ;
 
 	case WM_DESTROY:
