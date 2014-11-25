@@ -23,9 +23,13 @@ private:
          int age;
 };
 
+template <> auto_ptr<Student> Singleton<Student>::sg;
 
 int main()
 {
+    auto_ptr<Student> singleton(Singleton<Student>::getInstance());
+    singleton->print_info();
+
     string s = number2String(55);
     cout<<s<<endl;
     system("pause");
