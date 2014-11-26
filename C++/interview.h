@@ -57,7 +57,7 @@ std::string endTrim(std::string&);
 template <typename T>
 std::string number2String ( T n )
 {
-    stringstream ss;
+    std::stringstream ss;
     ss << n;
     return ss.str();
 }
