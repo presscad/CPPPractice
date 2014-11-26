@@ -170,3 +170,33 @@ std::string endTrim(std::string& s)
     return s;
 }
 
+size_t highestBitPosition(unsigned int a)
+{
+    size_t bits=0;
+    while (a!=0) {
+        ++bits;
+        a>>=1;
+    };
+    return bits;
+}
+
+bool addSafe(unsigned int a, unsigned int b)
+{
+    size_t a_bits=highestBitPosition(a);
+    size_t b_bits=highestBitPosition(b);
+    return (a_bits<32 && b_bits<32);
+}
+
+bool multiplySafe(unsigned int a, unsigned int b)
+{
+    size_t a_bits=highestBitPosition(a);
+    size_t b_bits=highestBitPosition(b);
+    return (a_bits+b_bits<=32);
+}
+
+bool exponentSafe(unsigned int a, unsigned int b)
+{
+    size_t a_bits=highestBitPosition(a);
+    return (a_bits*b<=32);
+}
+

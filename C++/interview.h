@@ -62,5 +62,9 @@ std::string number2String ( T n )
     return ss.str();
 }
 
-
+//Best way to detect integer overflow in C/C++
+size_t highestBitPosition(unsigned int);
+bool addSafe(unsigned int,unsigned int);
+bool multiplySafe(unsigned int,unsigned int);
+bool exponentSafe(unsigned int,unsigned int);
 #endif // INTERVIEW_H
