@@ -12,7 +12,8 @@ size_t slenth(const char *s){
 
 void reverse(char *b){
     char c;
-    int j, len;
+    int j;
+    size_t len;
     len=strlen(b);
     j=len/2-1;
     while(j>=0)
