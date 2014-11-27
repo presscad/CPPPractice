@@ -16,3 +16,15 @@ Debug/CPPPractice.app/Contents/PkgInfo
 Debug/Makefile
 
 C++/CPPPractice.pro.user
+
+*.xcuserstate
+
+CPP/CPP.xcodeproj/project.xcworkspace/xcuserdata/ht.xcuserdatad/UserInterfaceState.xcuserstate
+
+*.xcuserstate
+
+CPP/CPP.xcodeproj/xcuserdata/ht.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist
+
+*.xcuserstate
+
+CPP/CPP.xcodeproj/project.xcworkspace/xcuserdata/ht.xcuserdatad/UserInterfaceState.xcuserstate
