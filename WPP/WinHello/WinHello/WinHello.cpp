@@ -59,37 +59,139 @@ int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 
 
-LRESULT CALLBACK WndProc (HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
+void Show (HWND hwnd, HDC hdc, int xText, int yText, int iMapMode,
+		   TCHAR * szMapMode)
 {
-	static HRGN hRgnClip ;
-	static int  cxClient, cyClient ;
-	double      fAngle, fRadius ;
-	HCURSOR     hCursor ;
-	HDC         hdc ;
-	HRGN        hRgnTemp[6] ;
-	int         i ;
-	PAINTSTRUCT ps ;
+	TCHAR szBuffer [60] ;
+	RECT  rect ;
 
-	switch (iMsg)
+	SaveDC (hdc) ;
+
+	SetMapMode (hdc, iMapMode) ;
+	GetClientRect (hwnd, &rect) ;
+	DPtoLP (hdc, (PPOINT) &rect, 2) ;
+
+	RestoreDC (hdc, -1) ;
+
+	TextOut (hdc, xText, yText, szBuffer,
+		wsprintf (szBuffer, TEXT ("%-20s %7d %7d %7d %7d"), szMapMode,
+		rect.left, rect.right, rect.top, rect.bottom)) ;
+}  
+
+LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	static struct
 	{
-	case WM_SIZE:
-		cxClient = LOWORD (lParam) ;
-		cyClient = HIWORD (lParam) ;
+		int     idStockFont ;
+		TCHAR * szStockFont ;
+	}
+	stockfont [] = { OEM_FIXED_FONT,      TEXT ("OEM_FIXED_FONT"),
+		ANSI_FIXED_FONT,     TEXT ("ANSI_FIXED_FONT"),    
+		ANSI_VAR_FONT,       TEXT ("ANSI_VAR_FONT"),
+		SYSTEM_FONT,         TEXT ("SYSTEM_FONT"),
+		DEVICE_DEFAULT_FONT, TEXT ("DEVICE_DEFAULT_FONT"),
+		SYSTEM_FIXED_FONT,   TEXT ("SYSTEM_FIXED_FONT"),
+		DEFAULT_GUI_FONT,    TEXT ("DEFAULT_GUI_FONT") } ;
 
-		CombieCloverRgn(hRgnClip,cxClient,cyClient);
-		
+	static int  iFont, cFonts = sizeof stockfont / sizeof stockfont[0] ;
+	HDC         hdc ;
+	int         i, x, y, cxGrid, cyGrid ;
+	PAINTSTRUCT ps ;
+	TCHAR       szFaceName [LF_FACESIZE], szBuffer [LF_FACESIZE + 64] ;
+	TEXTMETRIC  tm ;
+
+	switch (message)
+	{
+	case WM_CREATE:
+		SetScrollRange (hwnd, SB_VERT, 0, cFonts - 1, TRUE) ;
+		return 0 ;
+
+	case WM_DISPLAYCHANGE:
+		InvalidateRect (hwnd, NULL, TRUE) ;
+		return 0 ;
+
+	case WM_VSCROLL:
+		switch (LOWORD (wParam))
+		{
+		case SB_TOP:            iFont = 0 ;                break ;
+		case SB_BOTTOM:         iFont = cFonts - 1 ;       break ;
+		case SB_LINEUP:
+		case SB_PAGEUP:         iFont -= 1 ;               break ;
+		case SB_LINEDOWN:
+		case SB_PAGEDOWN:       iFont += 1 ;               break ;
+		case SB_THUMBPOSITION:  iFont = HIWORD (wParam) ;  break ;
+		}
+		iFont = max (0, min (cFonts - 1, iFont)) ;
+		SetScrollPos (hwnd, SB_VERT, iFont, TRUE) ;
+		InvalidateRect (hwnd, NULL, TRUE) ;
+		return 0 ;
+
+	case WM_KEYDOWN:
+		switch (wParam)
+		{
+		case VK_HOME: SendMessage (hwnd, WM_VSCROLL, SB_TOP, 0) ;      break ;
+		case VK_END:  SendMessage (hwnd, WM_VSCROLL, SB_BOTTOM, 0) ;   break ;
+		case VK_PRIOR:
+		case VK_LEFT:
+		case VK_UP:   SendMessage (hwnd, WM_VSCROLL, SB_LINEUP, 0) ;   break ;
+		case VK_NEXT: 
+		case VK_RIGHT:
+		case VK_DOWN: SendMessage (hwnd, WM_VSCROLL, SB_PAGEDOWN, 0) ; break ;
+		}
 		return 0 ;
 
 	case WM_PAINT:
-		
-		PaintClover(hwnd,hRgnClip,cxClient,cyClient);
+		hdc = BeginPaint (hwnd, &ps) ;
 
-		return 0 ;
+		SelectObject (hdc, GetStockObject (stockfont[iFont].idStockFont)) ;
+		GetTextFace (hdc, LF_FACESIZE, szFaceName) ;
+		GetTextMetrics (hdc, &tm) ;
+		cxGrid = max (3 * tm.tmAveCharWidth, 2 * tm.tmMaxCharWidth) ;
+		cyGrid = tm.tmHeight + 3 ;
+
+		TextOut (hdc, 0, 0, szBuffer, 
+			wsprintf (szBuffer, TEXT (" %s: Face Name = %s, CharSet = %i"),
+			stockfont[iFont].szStockFont, 
+			szFaceName, tm.tmCharSet)) ;
+
+		SetTextAlign (hdc, TA_TOP | TA_CENTER) ;
+
+		// vertical and horizontal lines
+
+		for (i = 0 ; i < 17 ; i++)
+		{
+			MoveToEx (hdc, (i + 2) * cxGrid,  2 * cyGrid, NULL) ;
+			LineTo   (hdc, (i + 2) * cxGrid, 19 * cyGrid) ;
+
+			MoveToEx (hdc,      cxGrid, (i + 3) * cyGrid, NULL) ;
+			LineTo   (hdc, 18 * cxGrid, (i + 3) * cyGrid) ;
+		}
+		// vertical and horizontal headings
+
+		for (i = 0 ; i < 16 ; i++)
+		{
+			TextOut (hdc, (2 * i + 5) * cxGrid / 2, 2 * cyGrid + 2, szBuffer,
+				wsprintf (szBuffer, TEXT ("%X-"), i)) ;
+
+			TextOut (hdc, 3 * cxGrid / 2, (i + 3) * cyGrid + 2, szBuffer,
+				wsprintf (szBuffer, TEXT ("-%X"), i)) ;
+		}
+		// characters
+
+		for (y = 0 ; y < 16 ; y++)
+			for (x = 0 ; x < 16 ; x++)
+			{
+				TextOut (hdc, (2 * x + 5) * cxGrid / 2, 
+					(y + 3) * cyGrid + 2, szBuffer,
+					wsprintf (szBuffer, TEXT ("%c"), 16 * x + y)) ;
+			}
+
+			EndPaint (hwnd, &ps) ;
+			return 0 ;
 
 	case WM_DESTROY:
-		DeleteObject (hRgnClip) ;
 		PostQuitMessage (0) ;
 		return 0 ;
 	}
-	return DefWindowProc (hwnd, iMsg, wParam, lParam) ;
+	return DefWindowProc (hwnd, message, wParam, lParam) ;
 }
