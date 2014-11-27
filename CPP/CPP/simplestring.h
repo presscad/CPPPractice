@@ -7,7 +7,9 @@
 
 #ifndef SIMPLESTRING_H
 #define SIMPLESTRING_H
-#include <string.h>
+
+
+#include <string>
 #include <iostream>
 
 
