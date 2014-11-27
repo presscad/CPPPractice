@@ -1,4 +1,8 @@
 #include "alg.h"
+#include<iostream>
+#include<string>
+
+using namespace std;
 
 size_t slenth(const char *s){
     if(NULL == s)

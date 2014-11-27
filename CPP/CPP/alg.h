@@ -1,14 +1,13 @@
 #ifndef ALG_H
 #define ALG_H
 
-#include<iostream>
 #include<string>
 
-using namespace std;
-
+//Caculate a string length
 size_t slenth(const char *s);
-void reverse(char *b);
 
+//Reverse a string
+void reverse(char *b);
 
 //Insert sort:worst case O(n^2)
 void insertSort(int arr[],size_t size);
