@@ -67,4 +67,11 @@ size_t highestBitPosition(unsigned int);
 bool addSafe(unsigned int,unsigned int);
 bool multiplySafe(unsigned int,unsigned int);
 bool exponentSafe(unsigned int,unsigned int);
+
+//Appending a vector to a vector
+template <typename T>
+void mergeVector(std::vector<T>& a, std::vector<T> b)
+{
+	a.insert(a.end(), b.begin(), b.end());
+}
 #endif // INTERVIEW_H
