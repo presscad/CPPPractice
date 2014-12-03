@@ -70,7 +70,7 @@ bool exponentSafe(unsigned int,unsigned int);
 
 //Appending a vector to a vector
 template <typename T>
-void mergeVector(std::vector<T>& a, std::vector<T> b)
+void mergeVector(std::vector<T>& a, const std::vector<T> &b)
 {
 	a.insert(a.end(), b.begin(), b.end());
 }
