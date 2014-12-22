@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="405,234" caption="0,0,0,30" roundcorner="3,3,3,3" bktrans="true">
+	<Font name="Arial" size="15" bold="true"/>
+	<VerticalLayout name="" text="" tooltip="" float="false" bkcolor="#FF44A0E0" bkcolor2="FF2B93DD">
+		<HorizontalLayout name="" text="" tooltip="" float="false" height="32" bkcolor="#006B93B2" inset="4,4,4,4" >
+			<Container name="" text="" tooltip="" float="false" height="24" bkcolor="#00757676" inset="15,0,0,0">
+				<Label name="loginTitle" font="Arial" text="Client Demo" tooltip="" float="false" bkcolor="#00B9D1EF" textcolor="#FFFFFFFF" disabledtextcolor="#FFA7A6AA"/>
+			</Container>
+			<Button name="minbtn" text="" tooltip="" float="false" bordersize="0" width="19" height="19"  maxheight="19" maxwidth="19" normalimage="file='Minimize.png' source='0,0,19,19'" hotimage="file='Minimize_rollOver.png' source='0,0,19,19'" pushedimage="file='Minimize_press.png' source='0,0,19,19'"  />
+			<Button name="closebtn" text="" tooltip="" float="false" bordersize="0" width="19" height="19"  maxheight="19" maxwidth="19" normalimage="file='Close.png' source='0,0,19,19'" hotimage="file='Close_press.png' source='0,0,19,19'" pushedimage="file='Close_rollOver.png' source='0,0,19,19'"  />
+		</HorizontalLayout>
+		<Container name="" text="" tooltip="" float="false" height="50" bkcolor="#00757676" />
+		<HorizontalLayout name="" text="" tooltip="" float="false" height="40" bkcolor="#006B93B2" >
+			<Container name="" text="" tooltip="" float="false" bordersize="1" height="40" bkcolor="#00757676" width="60">
+				<Label name="userlbl" text="Username" tooltip="" float="false" bordersize="1" bkcolor="#00B9D1EF" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" />
+			</Container>
+			<Edit name="useredit" text="" tooltip="" float="false" width="100" height="28" bkcolor="#FFFFFFFF" maxheight="40" />
+			<Button name="register" text="Register" tooltip="" float="false"  width="40" height="40" />
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

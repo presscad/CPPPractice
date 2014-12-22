@@ -29,7 +29,7 @@ DuiLib::CDuiString MainWindow::GetSkinFolder()
 
 DuiLib::CDuiString MainWindow::GetSkinFile()
 {
-	return _T("duilib.xml");
+	return _T("mainwin.xml");
 }
 
 UILIB_RESOURCETYPE MainWindow::GetResourceType() const
