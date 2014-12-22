@@ -17,4 +17,5 @@ void PaintSinWave(HWND hwnd, int cxClient, int cyClient);
 void DrawBezier (HDC hdc, POINT apt[]);
 void CombieCloverRgn(HRGN &hRgnClip, int cxClient, int cyClient);
 void PaintClover(HWND hwnd,HRGN hRgnClip, int cxClient, int cyClient);
+void DrawBoxOutline(HWND hwnd, POINT ptBeg, POINT ptEnd);
 #endif

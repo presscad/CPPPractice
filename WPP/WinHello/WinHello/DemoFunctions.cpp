@@ -344,3 +344,16 @@ void PaintClover(HWND hwnd,HRGN hRgnClip, int cxClient, int cyClient)
 	}
 	EndPaint (hwnd, &ps) ;
 }
+
+void DrawBoxOutline(HWND hwnd, POINT ptBeg, POINT ptEnd)
+{
+	HDC hdc;
+
+	hdc = GetDC(hwnd);
+
+	SetROP2(hdc, R2_NOT);
+	SelectObject(hdc, GetStockObject(NULL_BRUSH));
+	Rectangle(hdc, ptBeg.x, ptBeg.y, ptEnd.x, ptEnd.y);
+
+	ReleaseDC(hwnd, hdc);
+}
