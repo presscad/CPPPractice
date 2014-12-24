@@ -11,7 +11,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 	HRESULT Hr = ::CoInitialize(NULL);
 	if (FAILED(Hr)) return 0;
 
-	LoginWindow* pFrame = new LoginWindow();
+	MainWindow* pFrame = new MainWindow();
 	if (pFrame == NULL) return 0;
 	pFrame->Create(NULL, _T(""), UI_WNDSTYLE_FRAME, 0L, 0, 0, 500, 400);
 	pFrame->CenterWindow();

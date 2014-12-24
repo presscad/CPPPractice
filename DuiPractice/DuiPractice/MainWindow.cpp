@@ -109,21 +109,6 @@ void MainWindow::InitWindow()
 	m_pMinBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("minbtn")));
 }
 
-LRESULT MainWindow::OnMouseHover(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-{
-	POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
-	CControlUI* pHover = m_PaintManager.FindControl(pt);
-	if (pHover == NULL) return 0;
-	/*演示悬停在下载列表的图标上时，动态变换下载图标状态显示*/
-	if (pHover->GetName() == _T("down_ico"))
-	{
-		MessageBox(NULL, _T("鼠标在某控件例如按钮上悬停后，对目标控件操作，这里改变了状态图标大小"), _T("DUILIB DEMO"), MB_OK);
-		((CButtonUI *)pHover)->ApplyAttributeList(
-			_T("normalimage=\"file='downlist_pause.png' dest='15,9,32,26'\""));
-	}
-	return 0;
-}
-
 LRESULT MainWindow::OnChar(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	/*演示键盘消息的处理*/
