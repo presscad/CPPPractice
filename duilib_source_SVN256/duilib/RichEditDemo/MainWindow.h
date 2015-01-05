@@ -74,6 +74,8 @@ protected:
 	LRESULT OnLButtonDblClk(UINT uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT OnFaceCtrlSel(UINT uMsg, WPARAM wParam, LPARAM lParam);	// “表情”控件选取消息
 
+	LRESULT onDropFiles(UINT uMsg, WPARAM wParam, LPARAM lParam);
+
 	void _RichEdit_ReplaceSel(CRichEditUI * pRichEdit, LPCTSTR lpszNewText);
 	BOOL _RichEdit_InsertFace(CRichEditUI * pRichEdit, LPCTSTR lpszFileName, int nFaceId, int nFaceIndex);
 	BOOL HandleSysFaceId(CRichEditUI * pRichEdit, LPCTSTR& p, tstring& strText);

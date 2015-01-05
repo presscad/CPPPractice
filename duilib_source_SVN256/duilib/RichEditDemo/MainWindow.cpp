@@ -66,6 +66,8 @@ void CMainWindow::Init()
 	m_pSendEdit = static_cast<CRichEditUI*>(paint_manager_.FindControl(_T("richSend")));
 	m_pRecvEdit = static_cast<CRichEditUI*>(paint_manager_.FindControl(_T("richRecv")));
 
+	DragAcceptFiles(m_hWnd, true);
+
 	IRichEditOleCallback2* pRichEditOleCallback2 = NULL;
 	HRESULT hr = ::CoCreateInstance(CLSID_ImageOle, NULL, CLSCTX_INPROC_SERVER,
 		__uuidof(IRichEditOleCallback2), (void**)&pRichEditOleCallback2);
@@ -205,6 +207,9 @@ LRESULT CMainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	if (uMsg == FACE_CTRL_SEL)
 		return OnFaceCtrlSel(uMsg, wParam, lParam);
+
+	if (uMsg == WM_DROPFILES)
+		return onDropFiles(uMsg, wParam, lParam);
 
 	return __super::HandleMessage(uMsg, wParam, lParam);
 }
@@ -796,6 +801,23 @@ LRESULT CMainWindow::OnFaceCtrlSel(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		m_pSendEdit->SetFocus();
 	}
 	((COptionUI *)m_pFaceBtn)->Selected(false);
+	return 0;
+}
+
+LRESULT CMainWindow::onDropFiles(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+
+	TCHAR acFile[MAX_PATH + 1];
+
+	DragQueryFile((HDROP)wParam, 0, acFile, sizeof(acFile));
+
+	MessageBox(NULL, acFile, _T("Some dropped:"), MB_OK);
+
+	DragFinish((HDROP)wParam);
+
+	_RichEdit_InsertFace(m_pSendEdit, acFile, -1, -1);
+	m_pSendEdit->SetFocus();
+
 	return 0;
 }
 
