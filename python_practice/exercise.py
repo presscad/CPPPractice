@@ -270,3 +270,114 @@ a.sort()
 print a
 print a.pop()
 print a
+
+def f(x): return x % 3 == 0 or x % 5 == 0
+print filter(f, range(2, 25))
+
+def cube(x): return x*x*x
+print map(cube, range(1, 11))
+
+def add(x,y): return x+y
+print reduce(add, range(1, 101))
+
+from math import pi
+print [str(round(pi, i)) for i in range(1, 6)]
+
+matrix = [[1, 2, 3, 4],[5, 6, 7, 8],[9, 10, 11, 12]]
+print [[row[i] for row in matrix] for i in range(4)]
+
+a = [-1, 1, 66.25, 333, 333, 1234.5]
+del a[0]
+print a
+del a[2:4]
+print a
+del a[:]
+print a
+
+t = 12345, 54321, 'hello!'
+print t[0]
+print t
+# Tuples may be nested:
+u = t, (1, 2, 3, 4, 5)
+print u
+# Tuples are immutable:
+# but they can contain mutable objects:
+v = ([1, 2, 3], [3, 2, 1])
+print v
+
+basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+fruit = set(basket)               # create a set without duplicates
+print fruit
+print 'orange' in fruit                 # fast membership testing
+True
+print 'crabgrass' in fruit
+False
+
+# Demonstrate set operations on unique letters from two words
+a = set('abracadabra')
+b = set('alacazam')
+print a                                  # unique letters in a
+print a - b                              # letters in a but not in b
+print a | b                              # letters in either a or b
+print a & b                              # letters in both a and b
+print a ^ b                              # letters in a or b but not both
+
+a = {x for x in 'abracadabra' if x not in 'abc'}
+print a
+
+tel = {'jack': 4098, 'sape': 4139}
+tel['guido'] = 4127
+print tel
+print tel['jack']
+del tel['sape']
+tel['irv'] = 4127
+print tel
+print tel.keys()
+print 'guido' in tel
+True
+
+#The dict() constructor builds dictionaries directly from sequences of key-value pairs:
+print dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
+print dict(sape=4139, guido=4127, jack=4098)
+
+print {x: x**2 for x in (2, 4, 6)}
+
+#When looping through a sequence, the position index and corresponding value can be retrieved at the same time using the enumerate() function.
+for i, v in enumerate(['tic', 'tac', 'toe']):
+	print i, v
+
+#To loop over two or more sequences at the same time, the entries can be paired with the zip() function.	
+questions = ['name', 'quest', 'favorite color']
+answers = ['lancelot', 'the holy grail', 'blue']
+for q, a in zip(questions, answers):
+	print 'What is your {0}?  It is {1}.'.format(q, a)
+
+#To loop over a sequence in reverse, first specify the sequence in a forward direction and then call the reversed() function.	
+for i in reversed(xrange(1,10,2)):
+	print i
+
+#To loop over a sequence in sorted order, use the sorted() function which returns a new sorted list while leaving the source unaltered.
+basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+for f in sorted(set(basket)):
+	print f
+
+#When looping through dictionaries, the key and corresponding value can be retrieved at the same time using the iteritems() method.
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.iteritems():
+	print k, v
+	print f
+
+import sys
+#print sys.ps1
+#print sys.ps2
+#sys.ps1 = 'C> '
+
+import sys
+print sys.path
+
+import fibo
+print dir(fibo)
+print dir(sys)
+
+import __builtin__
+dir(__builtin__)  
