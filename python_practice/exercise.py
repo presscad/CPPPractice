@@ -381,3 +381,5 @@ print dir(sys)
 
 import __builtin__
 dir(__builtin__)  
+print(1/7)
+
