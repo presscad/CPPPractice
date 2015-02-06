@@ -198,3 +198,4 @@
 # alias cd=cd_func
 alias ls='ls --color --show-control-chars'
 cmd /c chcp 65001
+shopt -s nocaseglob
