@@ -1,0 +1,1 @@
+netsh interface ip set address 本地连接 static 10.1.7.53 255.255.240.0 10.1.1.1
