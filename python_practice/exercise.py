@@ -36,7 +36,7 @@ print prefix + 'thon'
 
 text = ('Put several strings within parentheses '
             'to have them joined together.')
-print text			
+print text
 
 word = 'Python'
 print word[0]  # character in position 0
@@ -142,7 +142,7 @@ else:
 words = ['cat', 'window', 'defenestrate']
 for w in words:
 	print w, len(w)
-	
+
 for w in words[:]:  # Loop over a slice copy of the entire list.
 	if len(w) > 6:
 		words.insert(0, w)
@@ -157,7 +157,7 @@ print range(-10, -100, -30)
 a = ['Mary', 'had', 'a', 'little', 'lamb']
 for i in range(len(a)):
 	print i, a[i]
-	
+
 for n in range(2, 10):
 	for x in range(2, n):
 		if n % x == 0:
@@ -166,10 +166,10 @@ for n in range(2, 10):
 		else:
 			# loop fell through without finding a factor
 			print n, 'is a prime number'
-			
+
 #while True:
 #	pass  # Busy-wait for keyboard interrupt (Ctrl+C)
-	
+
 def fib(n):    # write Fibonacci series up to n
 	"""Print a Fibonacci series up to n."""
 	a, b = 0, 1
@@ -195,7 +195,7 @@ ask_ok('Do you really want to quit?')
 
 def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
     print voltage,state,action,type
-	
+
 parrot(1000)                                          # 1 positional argument
 parrot(voltage=1000)                                  # 1 keyword argument
 parrot(voltage=1000000, action='VOOOOOM')             # 2 keyword arguments
@@ -212,20 +212,20 @@ def cheeseshop(kind, *arguments, **keywords):
     keys = sorted(keywords.keys())
     for kw in keys:
         print kw, ":", keywords[kw]
-		
+
 cheeseshop("Limburger", "It's very runny, sir.",
            "It's really very, VERY runny, sir.",
            shopkeeper='Michael Palin',
            client="John Cleese",
            sketch="Cheese Shop Sketch")
-		   
+
 range(3, 6)             # normal call with separate arguments
 args = [3, 6]
 print range(*args)            # call with arguments unpacked from a list
 
 def make_incrementor(n):
 	return lambda x: x + n
-	
+
 f = make_incrementor(42)
 print f(0)
 print f(1)
@@ -236,11 +236,11 @@ print pairs
 
 def my_function():
 	"""Do nothing, but document it.
-	
+
 	No, really, it doesn't do anything.
 	"""
 	pass
-	
+
 print my_function.__doc__
 
 #Coding Style:
@@ -252,7 +252,7 @@ print my_function.__doc__
 #When possible, put comments on a line of their own.
 #Use docstrings.
 #Use spaces around operators and after commas, but not directly inside bracketing constructs: a = f(1, 2) + g(3, 4).
-#Name your classes and functions consistently; the convention is to use CamelCase for classes and lower_case_with_underscores for functions and methods. 
+#Name your classes and functions consistently; the convention is to use CamelCase for classes and lower_case_with_underscores for functions and methods.
 #Always use self as the name for the first method argument (see A First Look at Classes for more on classes and methods).
 #Don’t use fancy encodings if your code is meant to be used in international environments. Plain ASCII works best in any case.
 
@@ -346,13 +346,13 @@ print {x: x**2 for x in (2, 4, 6)}
 for i, v in enumerate(['tic', 'tac', 'toe']):
 	print i, v
 
-#To loop over two or more sequences at the same time, the entries can be paired with the zip() function.	
+#To loop over two or more sequences at the same time, the entries can be paired with the zip() function.
 questions = ['name', 'quest', 'favorite color']
 answers = ['lancelot', 'the holy grail', 'blue']
 for q, a in zip(questions, answers):
 	print 'What is your {0}?  It is {1}.'.format(q, a)
 
-#To loop over a sequence in reverse, first specify the sequence in a forward direction and then call the reversed() function.	
+#To loop over a sequence in reverse, first specify the sequence in a forward direction and then call the reversed() function.
 for i in reversed(xrange(1,10,2)):
 	print i
 
@@ -380,6 +380,6 @@ print dir(fibo)
 print dir(sys)
 
 import __builtin__
-dir(__builtin__)  
+dir(__builtin__)
 print(1/7)
 
