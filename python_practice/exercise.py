@@ -383,3 +383,12 @@ import __builtin__
 dir(__builtin__)
 print(1/7)
 
+for x in range(1,11):
+    print repr(x).rjust(2),repr(x*x).rjust(3),repr(x*x*x).rjust(4)
+
+import math
+print 'The value of PI is approximately {}.'.format(math.pi)
+
+with open("test.txt","w") as f:
+    f.write("Hello File!")
+
