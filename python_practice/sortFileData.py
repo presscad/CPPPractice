@@ -15,7 +15,7 @@ for line in cSpeedData:
     else:
         pos = lineStr[2].find("B")
         speed = lineStr[2][:pos]
-        speedPairs[lineStr[0]+lineStr[1]] = int(speed)
+        speedPairs[lineStr[0]+";"+lineStr[1]] = int(speed)
 
 from operator import itemgetter
 sortedPairs = sorted(speedPairs.items(), key=itemgetter(1))
