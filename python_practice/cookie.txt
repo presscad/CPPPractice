@@ -1,0 +1,10 @@
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.haijia.bjxueche.net	TRUE	/	FALSE	1433580802	ASP.NET_SessionId	u2bzu1rigcwx5vestanjlm1y
+.haijia.bjxueche.net	TRUE	/	FALSE	1433580802	CNZZDATA5234107	cnzz_eid%3D830999660-1430872957-http%253A%252F%252Fhaijia.bjxueche.net%252F%26ntime%3D1431078720
+.haijia.bjxueche.net	TRUE	/	FALSE	1433580802	CNZZDATA1000386726	1103739811-1430872934-http%253A%252F%252Fwww.haijia.com.cn%252F%7C1431075543
+.haijia.bjxueche.net	TRUE	/	FALSE	1433580802	ImgCode	quKyhOhxOVg=
+.haijia.bjxueche.net	TRUE	/	FALSE	1433580802	LoginOn	ZZVn3nrp5DY736VVJKb9CGe8w66xOBcwtRIYvrj7JojehzGZkJdUkvKltf/GUxu+LIzQy0AzOXzDEt9DJmsKqLUSGL64+yaIs2vGfgm+nq2hYPiHCyAbymR6mJOclT40BWYP7xw6guDgosuEWwMOVS0ppgEjJgorO4MpnrVfaDaknIGz7G3mRkZhpSECWVI+el6xc0NkW3YCkKI6xJpiQ5ZyUOSIxcMfRNnFHErxTMR+VmT8u34k+24Wskvqy3rxaZYh5mfYVBrqs9mqiTc9pA/kDDxaFTJ8iM/7RcEAXB+5l6JEh1GNQY+sdrqf7UATlhJIDePw9AVqnj8buxr2tiDxUudPvmBzbiqYCjGLJGb4nQnvYqkIzrfuQbQ4sOycS77ti4VAx6RKm/XAi6fCJMlB74DXlcOAglkieXJqa4SVrOqFW7y/fhJicRRI+DV7nNX3WmnJvl9IgQXsa57rSNv+iN/Wmohnfm+WNjqkm2luIekCARkxIoBKmgfMakQdEknNHI/7Xf332gjA5nQWVkyjx9g8M9jfFgzFN73R/lbejKcJg3RfdvqXge93Qk+Lg39i4SaO7grvNNiFA6rks+enZamXJCSZ
+
