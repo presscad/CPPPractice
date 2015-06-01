@@ -18,4 +18,15 @@ void DrawBezier (HDC hdc, POINT apt[]);
 void CombieCloverRgn(HRGN &hRgnClip, int cxClient, int cyClient);
 void PaintClover(HWND hwnd,HRGN hRgnClip, int cxClient, int cyClient);
 void DrawBoxOutline(HWND hwnd, POINT ptBeg, POINT ptEnd);
+
+BOOL StringReverseW(PWSTR pWideCharStr, DWORD cchLength);
+BOOL StringReverseA(PSTR pMultiByteStr, DWORD cchLength);
+
+#ifdef UNICODE
+#define StringReverse StringReverseW
+#else
+#define StringReverse StringReverseA
+#endif // !UNICODE
+
+
 #endif

@@ -357,3 +357,64 @@ void DrawBoxOutline(HWND hwnd, POINT ptBeg, POINT ptEnd)
 
 	ReleaseDC(hwnd, hdc);
 }
+
+BOOL StringReverseW(PWSTR pWideCharStr, DWORD cchLength)
+{
+	PWSTR pEndOfStr = pWideCharStr + wcsnlen_s(pWideCharStr, cchLength) - 1;
+	wchar_t cCharT;
+
+	while (pWideCharStr < pEndOfStr)
+	{
+		cCharT = *pWideCharStr;
+		*pWideCharStr = *pEndOfStr;
+		*pEndOfStr = cCharT;
+
+		pWideCharStr++;
+		pEndOfStr--;
+	}
+
+	return(TRUE);
+}
+
+BOOL StringReverseA(PSTR pMultiByteStr, DWORD cchLength) {
+	PWSTR pWideCharStr;
+	int nLenOfWideCharStr;
+	BOOL fOk = FALSE;
+
+	// Calculate the number of characters needed to hold
+	// the wide-character version of the string.
+	nLenOfWideCharStr = MultiByteToWideChar(CP_ACP, 0,
+		pMultiByteStr, cchLength, NULL, 0);
+
+	// Allocate memory from the process' default heap to
+	// accommodate the size of the wide-character string.
+	// Don't forget that MultiByteToWideChar returns the
+	// number of characters, not the number of bytes, so
+	// you must multiply by the size of a wide character.
+	pWideCharStr = (PWSTR)HeapAlloc(GetProcessHeap(), 0,
+		nLenOfWideCharStr * sizeof(wchar_t));
+
+	if (pWideCharStr == NULL)
+		return(fOk);
+
+	// Convert the multibyte string to a wide-character string.
+	MultiByteToWideChar(CP_ACP, 0, pMultiByteStr, cchLength,
+		pWideCharStr, nLenOfWideCharStr);
+
+	// Call the wide-character version of this
+	// function to do the actual work.
+	fOk = StringReverseW(pWideCharStr, cchLength);
+
+	if (fOk) {
+		// Convert the wide-character string back
+		// to a multibyte string.
+		WideCharToMultiByte(CP_ACP, 0, pWideCharStr, cchLength,
+			pMultiByteStr, (int)strlen(pMultiByteStr), NULL, NULL);
+	}
+
+	// Free the memory containing the wide-character string.
+	HeapFree(GetProcessHeap(), 0, pWideCharStr);
+
+	return(fOk);
+}
+
