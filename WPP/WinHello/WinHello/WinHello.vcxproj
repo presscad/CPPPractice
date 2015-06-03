@@ -88,9 +88,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DemoFunctions.cpp" />
     <ClCompile Include="WinHello.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DemoFunctions.h" />
     <ClInclude Include="SysMets.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
