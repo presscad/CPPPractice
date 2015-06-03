@@ -77,7 +77,8 @@ void Dlg_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify) {
 
 void CheckInstances() {
 
-   // Create the boundary descriptor
+   // Create the boundary descriptor, the descriptor is not a kernel object. 
+   // It is a pointer to a user-mode structure containing the definition of the boundary.
    g_hBoundary = CreateBoundaryDescriptor(g_szBoundary, 0);
 
    // Create a SID corresponding to the Local Administrator group
@@ -208,6 +209,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                      LPTSTR    lpCmdLine,
                      int       nCmdShow)
 {
+	//This UNREFERENCED_PARAMETER macro just suppresses a compiler warning about two parameters being unused in this function.
    UNREFERENCED_PARAMETER(hPrevInstance);
    UNREFERENCED_PARAMETER(lpCmdLine);
 
